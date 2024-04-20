@@ -1,6 +1,7 @@
 import pygame
 import math
 import copy
+import sys 
 from borders import *
 
 
@@ -872,10 +873,30 @@ def get_targets(red_x, red_y, blue_x, blue_y,
 
 if __name__ == '__main__':
     pygame.init()
+    
     WIDTH = 900
-    HEIGHT = 950
+    HEIGHT = 900
     screen = pygame.display.set_mode([WIDTH, HEIGHT])
     timer = pygame.time.Clock()
+    quit_button = Button(screen, 350, 250, 100, 50, RED, "Quit", WHITE, quit_game)
+
+    running = True
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:  # Left mouse button
+                    quit_button.handle_click()
+
+        screen.fill(WHITE)
+        quit_button.draw()
+
+        pygame.display.flip()
+        clock.tick(60)
+
+    pygame.quit()
+    sys.exit()
     fps = 60
     font = pygame.font.Font('freesansbold.ttf', 20)
     level = copy.deepcopy(borders)
