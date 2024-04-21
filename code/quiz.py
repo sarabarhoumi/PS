@@ -7,6 +7,7 @@ from borders import *
 import pygame as pg
 import sys
 import numpy as np
+<<<<<<< HEAD
 import math
 import pygame
 from pygame.time import Clock
@@ -14,6 +15,8 @@ from puzzle import Puzzle
 from game import Game
 import time
 import random
+=======
+>>>>>>> 7106c72e6a72f2cc3d312d5f987e55a24ea796b9
 
 class GameSelector(tk.Tk):
     def __init__(self):
@@ -142,14 +145,24 @@ class GameSelectionPage(tk.Tk):
             main()
 # **************************************   end PacMan       *********************************************   
 
+<<<<<<< HEAD
  
+=======
+# **************************************  start Soduku       *********************************************  
+>>>>>>> 7106c72e6a72f2cc3d312d5f987e55a24ea796b9
 
 
 
 
+<<<<<<< HEAD
  
     
 # **************************************  start Soduku       ********************************************* 
+=======
+# **************************************   end Soduku       *********************************************   
+    
+# ***************            other game......    
+>>>>>>> 7106c72e6a72f2cc3d312d5f987e55a24ea796b9
     def soduku(self):
         
 
@@ -197,7 +210,11 @@ class GameSelectionPage(tk.Tk):
                 for i in range(GRID_SIZE + 1):
                     thickness = 4 if i % 3 == 0 else 1
                     pg.draw.line(screen, BLACK, (0, i * CELL_SIZE), (SCREEN_WIDTH, i * CELL_SIZE), thickness)
+<<<<<<< HEAD
                     pg.draw.line(screen, BLACK, (i * CELL_SIZE, 0), (i * CELL_SIZE, SCREEN_HEIGHT - CELL_SIZE - MESSAGE_AREA_HEIGHT), thickness)
+=======
+                    pg.draw.line(screen, BLACK, (i * CELL_SIZE, 0), (i * CELL_SIZE, SCREEN_HEIGHT - CELL_SIZE), thickness)
+>>>>>>> 7106c72e6a72f2cc3d312d5f987e55a24ea796b9
                 for i in range(GRID_SIZE):
                     for j in range(GRID_SIZE):
                         value = self.grid[i][j]
@@ -246,7 +263,11 @@ class GameSelectionPage(tk.Tk):
                     self.selected = (col, row)
                 else:
                     self.selected = None
+<<<<<<< HEAD
         def main():
+=======
+        if __name__ == '__main__':
+>>>>>>> 7106c72e6a72f2cc3d312d5f987e55a24ea796b9
             pg.init()
             screen = pg.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
             pg.display.set_caption("ARIJ Game")
@@ -285,8 +306,11 @@ class GameSelectionPage(tk.Tk):
                 pg.display.flip()
             pg.quit()
             sys.exit()
+<<<<<<< HEAD
         if __name__ == "__main__":
             main()
+=======
+>>>>>>> 7106c72e6a72f2cc3d312d5f987e55a24ea796b9
         messagebox.showinfo("Flag Matching Game", "You are playing Flag Matching Game. Click OK to finish the game.")
 
         # After playing the game, display score
