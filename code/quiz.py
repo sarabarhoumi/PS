@@ -12,6 +12,8 @@ import pygame
 from pygame.time import Clock
 from puzzle import Puzzle
 from game import Game
+import time
+import random
 
 class GameSelector(tk.Tk):
     def __init__(self):
@@ -100,7 +102,7 @@ class GameSelectionPage(tk.Tk):
         self.capital_guessing_button = tk.Button(self, text="puzzle", font=("Arial", 16), command=self.puzzle)
         self.capital_guessing_button.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
 
-        self.balloon_catching_button = tk.Button(self, text="Balloon Catching Game", font=("Arial", 16), command=self.play_balloon_catching_game)
+        self.balloon_catching_button = tk.Button(self, text="Memory Card", font=("Arial", 16), command=self.MemoryCard)
         self.balloon_catching_button.place(relx=0.5, rely=0.6, anchor=tk.CENTER)
 #*********************************************************            PacMan                    ******************************************************************
     def play_PacMan(self):
@@ -195,7 +197,7 @@ class GameSelectionPage(tk.Tk):
                 for i in range(GRID_SIZE + 1):
                     thickness = 4 if i % 3 == 0 else 1
                     pg.draw.line(screen, BLACK, (0, i * CELL_SIZE), (SCREEN_WIDTH, i * CELL_SIZE), thickness)
-                    pg.draw.line(screen, BLACK, (i * CELL_SIZE, 0), (i * CELL_SIZE, SCREEN_HEIGHT - CELL_SIZE), thickness)
+                    pg.draw.line(screen, BLACK, (i * CELL_SIZE, 0), (i * CELL_SIZE, SCREEN_HEIGHT - CELL_SIZE - MESSAGE_AREA_HEIGHT), thickness)
                 for i in range(GRID_SIZE):
                     for j in range(GRID_SIZE):
                         value = self.grid[i][j]
@@ -244,7 +246,7 @@ class GameSelectionPage(tk.Tk):
                     self.selected = (col, row)
                 else:
                     self.selected = None
-        if __name__ == '__main__':
+        def main():
             pg.init()
             screen = pg.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
             pg.display.set_caption("ARIJ Game")
@@ -283,6 +285,8 @@ class GameSelectionPage(tk.Tk):
                 pg.display.flip()
             pg.quit()
             sys.exit()
+        if __name__ == "__main__":
+            main()
         messagebox.showinfo("Flag Matching Game", "You are playing Flag Matching Game. Click OK to finish the game.")
 
         # After playing the game, display score
@@ -366,13 +370,88 @@ class GameSelectionPage(tk.Tk):
 
         # After playing the game, display score
         self.display_score()
+# **************************************   end puzzle      *********************************************
 
-    def play_balloon_catching_game(self):
+# **************************************   start MemoryCard     *********************************************
+    def MemoryCard(self):
         # Placeholder function for playing Balloon Catching Game
+        class MemoryCardGame:
+            def __init__(self):
+                self.data = ["A", "B", "C", "D", "E", "F", "G", "H"]
+                self.data_length = len(self.data)
+                self.game_end = 0
+                self.dict_cards = {}
+                self.clicked_cards = 0
+                self.fst_ = None
+                self.scnd_ = None
+                self.start = time.time()
+
+                self.root = tk.Tk()
+                self.root.resizable(False,False)
+                self.root.title("Memory Game")
+
+                self.create_widgets()
+                self.random_text()
+
+            def create_widgets(self):
+                f1 = tk.Frame(self.root)
+                f1.pack()
+
+                fonts = ['Helvetica', '20', 'bold']
+
+                for i in range(16):
+                    btn = tk.Button(f1, font=(fonts), width="5", height="3", command=lambda i=i: self.bttn_clicked(i))
+                    btn.grid(row=i // 4, column=i % 4, padx=20, pady=40)
+                    self.dict_cards[btn] = ""
+
+            def random_text(self):
+                occurances = {"A": 0, "B": 0, "C": 0, "D": 0, "E": 0, "F": 0, "G": 0, "H": 0}
+                for bttn in self.dict_cards:
+                    if len(self.data) > 0:
+                        random.shuffle(self.data)
+                        x = self.data[0]
+                        self.dict_cards[bttn] = x
+                        occurances[x] = occurances[x] + 1
+                        if occurances[x] == 2:
+                            self.data.remove(x)
+
+            def bttn_clicked(self, index):
+                btn = list(self.dict_cards.keys())[index]
+                self.clicked_cards += 1
+
+                if self.clicked_cards == 1:
+                    self.fst_ = btn
+                    btn.configure(text=self.dict_cards[btn], state=tk.DISABLED)
+                elif self.clicked_cards == 2:
+                    self.scnd_ = btn
+                    btn.configure(text=self.dict_cards[btn], state=tk.DISABLED)
+                    self.root.after(500, self.check_same)
+
+            def check_same(self):
+                if self.scnd_['text'] != self.fst_['text']:
+                    self.fst_.configure(text="", state="normal")
+                    self.scnd_.configure(text="", state="normal")
+                else:
+                    self.game_end += 1
+
+                if self.game_end == self.data_length:
+                    messagebox.showinfo("MEMORY GAME", "You have spent " + str(int(time.time() - self.start)) + " sec!")
+                    self.root.destroy()
+
+                self.clicked_cards = 0
+
+            def play(self):
+                self.root.mainloop()
+
+        # Run the game
+        if __name__ == "__main__":
+            game = MemoryCardGame()
+            game.play()
         messagebox.showinfo("Balloon Catching Game", "You are playing Balloon Catching Game. Click OK to finish the game.")
 
         # After playing the game, display score
         self.display_score()
+# **************************************   end MemoryCard     *********************************************
 
     def display_score(self):
         # Placeholder function to display score
