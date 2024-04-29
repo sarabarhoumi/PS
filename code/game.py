@@ -5,7 +5,8 @@ import pygame
 from player import Player
 from enemies import *
 import tkinter
-from tkinter import messagebox
+from tkinter import messagebox 
+import tkinter.messagebox as tkMessageBox
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 576
 
@@ -27,7 +28,8 @@ class Game(object):
         # Create the menu of the game
         self.menu = Menu(("Start", "About", "Exit"), font_color=WHITE, font_size=60)
         # Create the player
-        self.player = Player(32,128,"player.png")
+        self.player1 = Player(32,128,"player.png")
+        self.player2 = Player(50,130,"player.png")
         # Create the blocks that will set the paths where the player can go
         self.horizontal_blocks = pygame.sprite.Group()
         self.vertical_blocks = pygame.sprite.Group()
@@ -80,54 +82,92 @@ class Game(object):
                             # --- EXIT -------
                             # User clicked exit
                             return True
+                
 
                 elif event.key == pygame.K_RIGHT:
-                    self.player.move_right()
+                    self.player1.move_right()
 
                 elif event.key == pygame.K_LEFT:
-                    self.player.move_left()
+                    self.player1.move_left()
 
                 elif event.key == pygame.K_UP:
-                    self.player.move_up()
+                    self.player1.move_up()
 
                 elif event.key == pygame.K_DOWN:
-                    self.player.move_down()
+                    self.player1.move_down()
+                
+                elif event.key == pygame.K_ESCAPE:
+                    self.game_over = True
+                    self.about = False
+                
+
+                elif event.key == pygame.K_d:
+                    self.player2.move_right()
+
+                elif event.key == pygame.K_q:
+                    self.player2.move_left()
+
+                elif event.key == pygame.K_z:
+                    self.player2.move_up()
+
+                elif event.key == pygame.K_s:
+                    self.player2.move_down()
                 
                 elif event.key == pygame.K_ESCAPE:
                     self.game_over = True
                     self.about = False
 
             elif event.type == pygame.KEYUP:
+                
                 if event.key == pygame.K_RIGHT:
-                    self.player.stop_move_right()
+                    self.player1.stop_move_right()
                 elif event.key == pygame.K_LEFT:
-                    self.player.stop_move_left()
+                    self.player1.stop_move_left()
                 elif event.key == pygame.K_UP:
-                    self.player.stop_move_up()
+                    self.player1.stop_move_up()
                 elif event.key == pygame.K_DOWN:
-                    self.player.stop_move_down()
+                    self.player1.stop_move_down()
+            
+                elif event.key == pygame.K_d:
+                    self.player2.stop_move_right()
+                elif event.key == pygame.K_q:
+                    self.player2.stop_move_left()
+                elif event.key == pygame.K_z:
+                    self.player2.stop_move_up()
+                elif event.key == pygame.K_s:
+                    self.player2.stop_move_down()
 
             elif event.type == pygame.MOUSEBUTTONDOWN:
-                self.player.explosion = True
+                
+                self.player1.explosion = True
+                
+                self.player2.explosion = True
                     
         return False
 
     def run_logic(self):
         if not self.game_over:
-            self.player.update(self.horizontal_blocks,self.vertical_blocks)
-            block_hit_list = pygame.sprite.spritecollide(self.player,self.dots_group,True)
+            self.player1.update(self.horizontal_blocks,self.vertical_blocks)
+            block_hit_list = pygame.sprite.spritecollide(self.player1,self.dots_group,True)
+            self.player2.update(self.horizontal_blocks,self.vertical_blocks)
+            block_hit_list = pygame.sprite.spritecollide(self.player2,self.dots_group,True)
             # When the block_hit_list contains one sprite that means that player hit a dot
             if len(block_hit_list) > 0:
                 # Here will be the sound effect
                 self.pacman_sound.play()
                 self.score += 1
-            block_hit_list = pygame.sprite.spritecollide(self.player,self.enemies,True)
+            block_hit_list = pygame.sprite.spritecollide(self.player1,self.enemies,True)
+            block_hit_list = pygame.sprite.spritecollide(self.player2,self.enemies,True)
             if len(block_hit_list) > 0:
-                self.player.explosion = True
+                self.player1.explosion = True
+                self.player2.explosion = True
                 self.game_over_sound.play()
-            self.game_over = self.player.game_over
+                ###j'ai ajouter ca
+                tkMessageBox.showinfo("GAME OVER!","Final Score = "+(str)(self.score)) 
+            self.game_over = self.player1.game_over
+            self.game_over = self.player2.game_over
             self.enemies.update(self.horizontal_blocks,self.vertical_blocks)
-           # tkMessageBox.showinfo("GAME OVER!","Final Score = "+(str)(GAME.score))    
+             
 
     def display_frame(self,screen):
         # First, clear the screen to white. Don't put other drawing commands
@@ -150,7 +190,8 @@ class Game(object):
             draw_enviroment(screen)
             self.dots_group.draw(screen)
             self.enemies.draw(screen)
-            screen.blit(self.player.image, self.player.rect)
+            screen.blit(self.player1.image, self.player1.rect)
+            screen.blit(self.player2.image, self.player2.rect)
             #text=self.font.render("Score: "+(str)(self.score), 1,self.RED)
             #screen.blit(text, (30, 650))
             # Render the text for the score

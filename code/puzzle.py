@@ -2,6 +2,9 @@ import math
 import pygame
 from pygame.constants import K_DOWN, K_LEFT, K_RIGHT, K_UP
 import random
+from pygame.time import Clock
+
+
 
 class Puzzle():
     def __init__(self, image_file_name, image_size, puzzle_size, pos, show_scramble=False) -> None:
@@ -153,4 +156,5 @@ class Puzzle():
             for i in range(self.scramble_moves):
                 random.choice(self.moves)(False)
             self.scramble_moves = 0
+
 

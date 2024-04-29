@@ -7,7 +7,7 @@ from borders import *
 import pygame as pg
 import sys
 import numpy as np
-<<<<<<< HEAD
+
 import math
 import pygame
 from pygame.time import Clock
@@ -15,8 +15,7 @@ from puzzle import Puzzle
 from game import Game
 import time
 import random
-=======
->>>>>>> 7106c72e6a72f2cc3d312d5f987e55a24ea796b9
+
 
 class GameSelector(tk.Tk):
     def __init__(self):
@@ -25,7 +24,7 @@ class GameSelector(tk.Tk):
         self.geometry("1032x622")
 
         # Load background image
-        self.background_image = tk.PhotoImage(file="image.png")  # Replace "boy.png" with your image file
+        self.background_image = tk.PhotoImage(file="boy.png")  # Replace "boy.png" with your image file
         self.background_label = tk.Label(self, image=self.background_image)
         self.background_image_resized = self.background_image.subsample(3, 3)
         self.background_label.place(x=0, y=0, relwidth=1, relheight=1)
@@ -78,7 +77,7 @@ class GameSelectionPage(tk.Tk):
         self.geometry("1032x622")
 
         # Load background image
-        self.background_image = tk.PhotoImage(file="image.png")  # Replace "background_image.png" with your image file
+        self.background_image = tk.PhotoImage(file="boy.png")  # Replace "background_image.png" with your image file
         self.background_label = tk.Label(self, image=self.background_image)
         self.background_label.place(x=0, y=0, relwidth=1, relheight=1)
 
@@ -107,62 +106,48 @@ class GameSelectionPage(tk.Tk):
 
         self.balloon_catching_button = tk.Button(self, text="Memory Card", font=("Arial", 16), command=self.MemoryCard)
         self.balloon_catching_button.place(relx=0.5, rely=0.6, anchor=tk.CENTER)
-#*********************************************************            PacMan                    ******************************************************************
+#**************************************             start PacMan                    ******************************************************************
     def play_PacMan(self):
-        SCREEN_WIDTH = 800
-        SCREEN_HEIGHT = 576
-    
+        SCREEN_WIDTH = 800  # Définition de la largeur de l'écran
+        SCREEN_HEIGHT = 576  # Définition de la hauteur de l'écran
+
         def main():
-            # Initialize all imported pygame modules
+            # Initialisation de tous les modules pygame importés
             pygame.init()
-            # Set the width and height of the screen [width, height]
+            # Définir la largeur et la hauteur de l'écran [largeur, hauteur]
             screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
-            # Set the current window caption
+            # Définir la légende de la fenêtre actuelle
             pygame.display.set_caption("PACMAN")
-            #Loop until the user clicks the close button.
+            # Boucle jusqu'à ce que l'utilisateur clique sur le bouton de fermeture.
             done = False
-            # Used to manage how fast the screen updates
+            # Utilisé pour gérer la vitesse de mise à jour de l'écran
             clock = pygame.time.Clock()
-            # Create a game object
+            # Créer un objet de jeu
             game = Game()
-            # -------- Main Program Loop -----------
+            # -------- Boucle principale du programme -----------
             while not done:
-                # --- Process events (keystrokes, mouse clicks, etc)
+                # --- Traiter les événements (appuis sur les touches, clics de souris, etc.)
                 done = game.process_events()
-                # --- Game logic should go here
+                # --- La logique du jeu devrait aller ici
                 game.run_logic()
-                # --- Draw the current frame
+                # --- Dessiner la trame actuelle
                 game.display_frame(screen)
-                # --- Limit to 30 frames per second
+                # --- Limiter à 30 images par seconde
                 clock.tick(30)
                 #tkMessageBox.showinfo("GAME OVER!","Final Score = "+(str)(GAME.score))
-            # Close the window and quit.
-            # If you forget this line, the program will 'hang'
-            # on exit if running from IDLE.
+            # Fermer la fenêtre et quitter.
+            # Si vous oubliez cette ligne, le programme restera "bloqué"
+            # à la sortie s'il est exécuté depuis IDLE.
             pygame.quit()
 
         if __name__ == '__main__':
             main()
+
 # **************************************   end PacMan       *********************************************   
 
-<<<<<<< HEAD
- 
-=======
+
+
 # **************************************  start Soduku       *********************************************  
->>>>>>> 7106c72e6a72f2cc3d312d5f987e55a24ea796b9
-
-
-
-
-<<<<<<< HEAD
- 
-    
-# **************************************  start Soduku       ********************************************* 
-=======
-# **************************************   end Soduku       *********************************************   
-    
-# ***************            other game......    
->>>>>>> 7106c72e6a72f2cc3d312d5f987e55a24ea796b9
     def soduku(self):
         
 
@@ -210,11 +195,11 @@ class GameSelectionPage(tk.Tk):
                 for i in range(GRID_SIZE + 1):
                     thickness = 4 if i % 3 == 0 else 1
                     pg.draw.line(screen, BLACK, (0, i * CELL_SIZE), (SCREEN_WIDTH, i * CELL_SIZE), thickness)
-<<<<<<< HEAD
+
                     pg.draw.line(screen, BLACK, (i * CELL_SIZE, 0), (i * CELL_SIZE, SCREEN_HEIGHT - CELL_SIZE - MESSAGE_AREA_HEIGHT), thickness)
-=======
+
                     pg.draw.line(screen, BLACK, (i * CELL_SIZE, 0), (i * CELL_SIZE, SCREEN_HEIGHT - CELL_SIZE), thickness)
->>>>>>> 7106c72e6a72f2cc3d312d5f987e55a24ea796b9
+
                 for i in range(GRID_SIZE):
                     for j in range(GRID_SIZE):
                         value = self.grid[i][j]
@@ -263,54 +248,53 @@ class GameSelectionPage(tk.Tk):
                     self.selected = (col, row)
                 else:
                     self.selected = None
-<<<<<<< HEAD
+
         def main():
-=======
-        if __name__ == '__main__':
->>>>>>> 7106c72e6a72f2cc3d312d5f987e55a24ea796b9
-            pg.init()
-            screen = pg.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-            pg.display.set_caption("ARIJ Game")
-            sudoku_game = SudokuGame()
-            running = True
-            while running:
-                for event in pg.event.get():
-                    if event.type == pg.QUIT:
-                        running = False
-                    elif event.type == pg.MOUSEBUTTONDOWN:
-                        pos = pg.mouse.get_pos()
-                        sudoku_game.click(pos)
-                    elif event.type == pg.KEYDOWN:
-                        if event.key == pg.K_1:
-                            sudoku_game.input_number(1)
-                        elif event.key == pg.K_2:
-                            sudoku_game.input_number(2)
-                        elif event.key == pg.K_3:
-                            sudoku_game.input_number(3)
-                        elif event.key == pg.K_4:
-                            sudoku_game.input_number(4)
-                        elif event.key == pg.K_5:
-                            sudoku_game.input_number(5)
-                        elif event.key == pg.K_6:
-                            sudoku_game.input_number(6)
-                        elif event.key == pg.K_7:
-                            sudoku_game.input_number(7)
-                        elif event.key == pg.K_8:
-                            sudoku_game.input_number(8)
-                        elif event.key == pg.K_9:
-                            sudoku_game.input_number(9)
-                        elif event.key == pg.K_DELETE or event.key == pg.K_BACKSPACE:
-                            sudoku_game.input_number(0)
-                screen.fill(WHITE)
-                sudoku_game.draw(screen)
-                pg.display.flip()
-            pg.quit()
-            sys.exit()
-<<<<<<< HEAD
+
+            if __name__ == '__main__':
+
+                pg.init()
+                screen = pg.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+                pg.display.set_caption("ARIJ Game")
+                sudoku_game = SudokuGame()
+                running = True
+                while running:
+                    for event in pg.event.get():
+                        if event.type == pg.QUIT:
+                            running = False
+                        elif event.type == pg.MOUSEBUTTONDOWN:
+                            pos = pg.mouse.get_pos()
+                            sudoku_game.click(pos)
+                        elif event.type == pg.KEYDOWN:
+                            if event.key == pg.K_1:
+                                sudoku_game.input_number(1)
+                            elif event.key == pg.K_2:
+                                sudoku_game.input_number(2)
+                            elif event.key == pg.K_3:
+                                sudoku_game.input_number(3)
+                            elif event.key == pg.K_4:
+                                sudoku_game.input_number(4)
+                            elif event.key == pg.K_5:
+                                sudoku_game.input_number(5)
+                            elif event.key == pg.K_6:
+                                sudoku_game.input_number(6)
+                            elif event.key == pg.K_7:
+                                sudoku_game.input_number(7)
+                            elif event.key == pg.K_8:
+                                sudoku_game.input_number(8)
+                            elif event.key == pg.K_9:
+                                sudoku_game.input_number(9)
+                            elif event.key == pg.K_DELETE or event.key == pg.K_BACKSPACE:
+                                sudoku_game.input_number(0)
+                    screen.fill(WHITE)
+                    sudoku_game.draw(screen)
+                    pg.display.flip()
+                pg.quit()
+                sys.exit()
+
         if __name__ == "__main__":
             main()
-=======
->>>>>>> 7106c72e6a72f2cc3d312d5f987e55a24ea796b9
+
         messagebox.showinfo("Flag Matching Game", "You are playing Flag Matching Game. Click OK to finish the game.")
 
         # After playing the game, display score
@@ -321,34 +305,94 @@ class GameSelectionPage(tk.Tk):
 
 # **************************************   start puzzle      *********************************************  
     def puzzle(self):
-        # Placeholder function for playing Capital Guessing Game
         
-
-        pygame.init()
-        pygame.font.init()
-        SIZE = WIDTH, HEIGHT = (1000, 1000)
-
-        BGCOLOR = (50, 50, 50)
-        GFONT = pygame.font.SysFont("Comic Sans MS", 30)
-        window = pygame.display.set_mode(SIZE, pygame.RESIZABLE)
-        pygame.display.set_caption('test')
-        clock = Clock()
-
-        p = Puzzle("image.jpg", (653, 980), (3, 3), (173, 10))
-        p.scramble()
-
+        # Fonction principale du programme
         def main():
-            up = left = down = right = False
+             
+            # Créez une instance de Clock pour contrôler le taux de rafraîchissement
+            clock = Clock()
+
+            # Initialisation de Pygame
+            pygame.init()
+            pygame.font.init()
+
+            # Définition de la taille de la fenêtre
+            SIZE = WIDTH, HEIGHT = (1000, 1000)
+
+            # Couleur de fond de la fenêtre
+            BGCOLOR = (50, 50, 50)
+
+            # Police de caractères pour le texte
+            GFONT = pygame.font.SysFont("Comic Sans MS", 30)
+
+            # Création de la fenêtre
+            window = pygame.display.set_mode(SIZE, pygame.RESIZABLE)
+            pygame.display.set_caption('test')
+            # Définition des coordonnées x et y pour la position initiale du puzzle dans la fenêtre
+            x = 100
+            y = 100
+
+            # Taille initiale de l'image
+            initial_image_size = (653, 750)
+
+            # Taille de la fenêtre
+            window_size = (1000, 1000)
+
+            # Nombre de pièces dans le puzzle pour le premier niveau
+            pieces_count = 2
+
+            # Calculer la taille d'une pièce en fonction du nombre de pièces dans une rangée ou une colonne
+            piece_width = initial_image_size[0] // pieces_count
+            piece_height = initial_image_size[1] // pieces_count
+
+            # Création de l'objet Puzzle initial avec les paramètres spécifiés
+            p= Puzzle(f'C:\\Users\\White Devil\\Desktop\\PacMan\\code\\image.jpg', initial_image_size, (pieces_count, pieces_count), (x, y))
+            p.scramble()  # Mélange initial du puzzle
+
+            # Définit le niveau de puzzle actuel en fonction du nombre de pièces
+            current_level = int(math.sqrt(pieces_count))
             
+
+            # Variables pour le suivi des touches pressées et du clic de souris
+            up = left = down = right = False
+            mouse_clicked = False  # Nouvelle variable pour suivre l'état du clic de souris
+            
+            # Boucle principale du jeu
             running = True
             while running:
+                # Limite le taux de rafraîchissement à 60 images par seconde
                 clock.tick(60)
                 
+                # Gestion des événements Pygame
                 for event in pygame.event.get():
-                    if event.type == pygame.QUIT:
+                    if event.type == pygame.QUIT:  # Si l'utilisateur ferme la fenêtre
                         running = False
+                    
+                    # Gestion des événements de clic de souris
+                    if event.type == pygame.MOUSEBUTTONDOWN:  # Si un bouton de la souris est enfoncé
+                        if event.button == 1:  # Bouton gauche de la souris
+                            mouse_clicked = True
+                    elif event.type == pygame.MOUSEBUTTONUP:  # Si un bouton de la souris est relâché
+                        if event.button == 1:  # Bouton gauche de la souris
+                            mouse_clicked = False
+                            # Vérifie si les coordonnées du clic sont à l'intérieur de la zone du bouton "Next Level"
+                            if 800 < event.pos[0] < 950 and 50 < event.pos[1] < 100:
+                                # Charge le niveau suivant du puzzle
+                                current_level += 1
+                                if current_level > 4:  # Supposons que le niveau maximal soit 4 (puzzle 4x4)
+                                    current_level = 2  # Reviens au niveau initial si le niveau maximal est atteint
+                                # Calculer le nombre de pièces pour le nouveau niveau
+                                pieces_count = current_level ** 2
+                                # Calculer la taille d'une pièce en fonction du nombre de pièces dans une rangée ou une colonne
+                                piece_width = initial_image_size[0] // current_level
+                                piece_height = initial_image_size[1] // current_level
+                                # Redimensionner l'image du puzzle avec la nouvelle taille des pièces
+                                p= Puzzle(f'C:\\Users\\White Devil\\Desktop\\PacMan\\code\\image.jpg', initial_image_size, (current_level, current_level), (x, y))
+                                p.scramble()
+                    # Vérifie si les mouvements sont autorisés avant de traiter les touches pressées
                     if p.moves_allowed():
-                        if event.type == pygame.KEYDOWN:
+                        if event.type == pygame.KEYDOWN:  # Si une touche est pressée
+                            # Gestion des mouvements du puzzle
                             if event.key == pygame.K_UP:
                                 if not up:
                                     p.move_up()
@@ -365,7 +409,8 @@ class GameSelectionPage(tk.Tk):
                                 if not right:
                                     p.move_right()
                                     right = True
-
+                    
+                    # Si une touche est relâchée, réinitialise le suivi des touches
                     if event.type == pygame.KEYUP:
                         if event.key == pygame.K_UP:
                             up = False
@@ -375,106 +420,133 @@ class GameSelectionPage(tk.Tk):
                             down = False
                         elif event.key == pygame.K_RIGHT:
                             right = False
-
+                
+                # Efface la fenêtre avec la couleur de fond
                 window.fill(BGCOLOR)
-
+                
+                # Met à jour et rend le puzzle sur la fenêtre
                 p.update()
                 p.render(window)
-
+                
+                # Si le puzzle est résolu, révèle-le à l'écran et affiche le bouton "Next Level"
                 if p.is_solved():
                     p.reveal(window)
-
+                    pygame.draw.rect(window, (0, 255, 0), pygame.Rect(800, 50, 150, 50), border_radius=5)
+                    font = pygame.font.SysFont(None, 30)
+                    text_surface = font.render("Next Level", True, (255, 255, 255))
+                    text_rect = text_surface.get_rect(center=(875, 75))
+                    window.blit(text_surface, text_rect)
+                
+                # Met à jour l'affichage de la fenêtre
                 pygame.display.update()
 
+        # Exécute la fonction principale si le script est lancé en tant que programme principal
         if __name__ == '__main__':
             main()
-
-
-        messagebox.showinfo("Capital Guessing Game", "You are playing Capital Guessing Game. Click OK to finish the game.")
-
-        # After playing the game, display score
-        self.display_score()
 # **************************************   end puzzle      *********************************************
+
+
 
 # **************************************   start MemoryCard     *********************************************
     def MemoryCard(self):
         # Placeholder function for playing Balloon Catching Game
         class MemoryCardGame:
             def __init__(self):
-                self.data = ["A", "B", "C", "D", "E", "F", "G", "H"]
-                self.data_length = len(self.data)
-                self.game_end = 0
-                self.dict_cards = {}
-                self.clicked_cards = 0
-                self.fst_ = None
-                self.scnd_ = None
-                self.start = time.time()
+                self.root = tk.Toplevel()  # Utilise Toplevel pour la fenêtre enfant
+                self.root.title("Memory Game")  # Définit le titre de la fenêtre
 
-                self.root = tk.Tk()
-                self.root.resizable(False,False)
-                self.root.title("Memory Game")
+                self.current_level = tk.StringVar(value="hard")  # Niveau par défaut est "Difficile"
+                self.game_end = 0  # Initialisation du compteur de fin de jeu
 
-                self.create_widgets()
-                self.random_text()
+                level_frame = tk.Frame(self.root)  # Crée un cadre pour le choix du niveau
+                level_frame.pack(pady=10)  # Ajoute un espacement en y de 10 pixels
+
+                easy_button = tk.Radiobutton(level_frame, text="Facile", variable=self.current_level, value="easy", font=("Helvetica", 14), command=self.update_game)
+                easy_button.pack(side=tk.LEFT, padx=10)  # Ajoute un bouton pour le niveau facile
+                hard_button = tk.Radiobutton(level_frame, text="Difficile", variable=self.current_level, value="hard", font=("Helvetica", 14), command=self.update_game)
+                hard_button.pack(side=tk.LEFT, padx=10)  # Ajoute un bouton pour le niveau difficile
+
+                self.game_window = tk.Frame(self.root)  # Crée un cadre pour le jeu
+                self.game_window.pack(pady=20)  # Ajoute un espacement en y de 20 pixels
+
+                self.cards = []  # Liste pour stocker les boutons de carte
+                self.clicked_cards = []  # Liste pour stocker les cartes cliquées
+                self.start_time = None  # Initialise le temps de début du jeu
+
+                self.create_widgets()  # Appelle la fonction pour créer les widgets
 
             def create_widgets(self):
-                f1 = tk.Frame(self.root)
-                f1.pack()
+                fonts = ('Helvetica', 20, 'bold')  # Définit la police pour les boutons de carte
 
-                fonts = ['Helvetica', '20', 'bold']
+                # Détermine le nombre de cartes en fonction du niveau actuel
+                data_length = 8 if self.current_level.get() == 'easy' else 16
 
-                for i in range(16):
-                    btn = tk.Button(f1, font=(fonts), width="5", height="3", command=lambda i=i: self.bttn_clicked(i))
-                    btn.grid(row=i // 4, column=i % 4, padx=20, pady=40)
-                    self.dict_cards[btn] = ""
+                # Génère des paires de données de carte mélangées
+                data = random.sample(list("ABCDEFGH"), data_length // 2) * 2
+                random.shuffle(data)
 
-            def random_text(self):
-                occurances = {"A": 0, "B": 0, "C": 0, "D": 0, "E": 0, "F": 0, "G": 0, "H": 0}
-                for bttn in self.dict_cards:
-                    if len(self.data) > 0:
-                        random.shuffle(self.data)
-                        x = self.data[0]
-                        self.dict_cards[bttn] = x
-                        occurances[x] = occurances[x] + 1
-                        if occurances[x] == 2:
-                            self.data.remove(x)
+                # Crée les boutons de carte
+                for i in range(data_length):
+                    btn = tk.Button(self.game_window, font=fonts, width=5, height=3, text="", command=lambda idx=i: self.flip_card(idx, data[idx]))
+                    btn.grid(row=i // 4, column=i % 4, padx=20, pady=40)  # Positionne les boutons dans une grille
+                    self.cards.append(btn)  # Ajoute le bouton à la liste
 
-            def bttn_clicked(self, index):
-                btn = list(self.dict_cards.keys())[index]
-                self.clicked_cards += 1
+            def flip_card(self, idx, text):
+                if len(self.clicked_cards) < 2:
+                    btn = self.cards[idx]
+                    btn.configure(text=text, state=tk.DISABLED)  # Désactive le bouton après le clic
+                    self.clicked_cards.append((idx, text))  # Ajoute la carte cliquée à la liste
 
-                if self.clicked_cards == 1:
-                    self.fst_ = btn
-                    btn.configure(text=self.dict_cards[btn], state=tk.DISABLED)
-                elif self.clicked_cards == 2:
-                    self.scnd_ = btn
-                    btn.configure(text=self.dict_cards[btn], state=tk.DISABLED)
-                    self.root.after(500, self.check_same)
+                    if len(self.clicked_cards) == 2:
+                        self.root.after(500, self.check_match)  # Vérifie les correspondances après un délai
 
-            def check_same(self):
-                if self.scnd_['text'] != self.fst_['text']:
-                    self.fst_.configure(text="", state="normal")
-                    self.scnd_.configure(text="", state="normal")
-                else:
-                    self.game_end += 1
+                        # Démarre le chronomètre lors du premier clic sur une carte
+                        if not self.start_time:
+                            self.start_time = time.time()
 
-                if self.game_end == self.data_length:
-                    messagebox.showinfo("MEMORY GAME", "You have spent " + str(int(time.time() - self.start)) + " sec!")
-                    self.root.destroy()
+            def check_match(self):
+                if len(self.clicked_cards) == 2:
+                    idx1, text1 = self.clicked_cards[0]
+                    idx2, text2 = self.clicked_cards[1]
 
-                self.clicked_cards = 0
+                    if text1 != text2:
+                        # Retourne les cartes non correspondantes après un délai
+                        self.cards[idx1].configure(text="", state=tk.NORMAL)
+                        self.cards[idx2].configure(text="", state=tk.NORMAL)
+                    else:
+                        self.game_end += 1  # Incrémente le compteur de fin de jeu
+
+                    self.clicked_cards.clear()  # Efface la liste des cartes cliquées
+
+                    # Vérifie si le jeu est terminé
+                    data_length = 8 if self.current_level.get() == 'easy' else 16
+                    if self.game_end == data_length // 2:
+                        elapsed_time = int(time.time() - self.start_time)
+                        messagebox.showinfo("Félicitations !", f"Vous avez terminé le jeu en {elapsed_time} secondes.")
+                        self.root.destroy()  # Ferme la fenêtre du jeu après la fin du jeu
+
+            def update_game(self):
+                # Détruit les cartes existantes
+                for card in self.cards:
+                    card.destroy()
+
+                # Réinitialise l'état du jeu
+                self.cards.clear()
+                self.clicked_cards.clear()
+                self.start_time = None
+                self.game_end = 0
+
+                # Crée de nouvelles cartes en fonction du niveau mis à jour
+                self.create_widgets()
 
             def play(self):
                 self.root.mainloop()
 
-        # Run the game
+        # Exécute le jeu
         if __name__ == "__main__":
             game = MemoryCardGame()
             game.play()
-        messagebox.showinfo("Balloon Catching Game", "You are playing Balloon Catching Game. Click OK to finish the game.")
 
-        # After playing the game, display score
-        self.display_score()
 # **************************************   end MemoryCard     *********************************************
 
     def display_score(self):
