@@ -148,17 +148,17 @@ class Game(object):
     def run_logic(self):
         if not self.game_over:
             self.player1.update(self.horizontal_blocks,self.vertical_blocks)
-            block_hit_list = pygame.sprite.spritecollide(self.player1,self.dots_group,True)
+            block_hit_list1 = pygame.sprite.spritecollide(self.player1,self.dots_group,True)
             self.player2.update(self.horizontal_blocks,self.vertical_blocks)
-            block_hit_list = pygame.sprite.spritecollide(self.player2,self.dots_group,True)
+            block_hit_list2 = pygame.sprite.spritecollide(self.player2,self.dots_group,True)
             # When the block_hit_list contains one sprite that means that player hit a dot
-            if len(block_hit_list) > 0:
+            if len(block_hit_list1 or block_hit_list2) > 0:
                 # Here will be the sound effect
                 self.pacman_sound.play()
                 self.score += 1
-            block_hit_list = pygame.sprite.spritecollide(self.player1,self.enemies,True)
-            block_hit_list = pygame.sprite.spritecollide(self.player2,self.enemies,True)
-            if len(block_hit_list) > 0:
+            block_hit_list1 = pygame.sprite.spritecollide(self.player1,self.enemies,True)
+            block_hit_list2 = pygame.sprite.spritecollide(self.player2,self.enemies,True)
+            if len(block_hit_list1 or block_hit_list2) > 0:
                 self.player1.explosion = True
                 self.player2.explosion = True
                 self.game_over_sound.play()
